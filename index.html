@@ -1,0 +1,52 @@
+<script>
+const choices = ["rock", "paper", "scissors"]
+
+function computerPlay(){
+  var min=0;
+  var max=3;
+  var random =Math.floor(Math.random() * (+max - +min)) + +min;
+  return choices[random];
+}
+function playRound(playerSelection, computerSelection) {
+  playerSelection = playerSelection.toLowerCase();
+	if (playerSelection === computerSelection) {
+    console.log(`${playerSelection} is equal to ${computerSelection}`)
+    return [0,0];
+  } else if ((playerSelection === "rock" && computerSelection === "paper") ||
+            ( playerSelection === "scissors" && computerSelection ==="rock") ||
+            ( playerSelection === "paper" && computerSelection ==="scissors")) {
+    console.log(`${computerSelection} beats ${playerSelection}`)
+    return [0,1];
+  } else {
+    console.log(`${playerSelection} beats ${computerSelection}`)
+    return [1,0]
+  }
+}
+
+function game(){
+  let playerScore = 0
+  let computerScore = 0
+  for (let i = 0; i < 5; i++) {
+    while (true) {
+      playerSelection = prompt("Please enter your choice");
+        if (choices.includes(playerSelection.toLowerCase())) {
+          break;
+        } else {
+          console.log(`${playerSelection}? Enter a valid choice`)
+        }
+    }
+    computerSelection = computerPlay()
+    result = playRound(playerSelection, computerSelection);
+    playerScore += result[0]
+    computerScore += result[1]
+  }
+  if (playerScore > computerScore) {
+    console.log("You won")
+  } else if (playerScore < computerScore) {
+    console.log("You loose")
+  } else {
+    console.log("Remis")
+  }
+}
+
+</script>
